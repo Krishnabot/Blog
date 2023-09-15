@@ -1,9 +1,10 @@
-<h1> My indivisual Blog Post </h1>
-<div>
-    <h4><%= link_to 'Go to Home', root_path %></h4>
-<div>
+<h1 style="text-align: center; margin-top: 20px;">My Individual Blog Post</h1>
 
-<div>
-<h2><%= @blog_post.title %></h2>
-<%= @blog_post.body %>
+<div style="text-align: center; margin-top: 10px;">
+  <h4><%= link_to 'Go to Home', root_path %></h4>
+</div>
+
+<div style="padding: 20px; border: 1px solid #ccc; margin: 20px;">
+  <h2 style="color: #333;"><%= @blog_post.title %></h2>
+  <p style="font-size: 16px; line-height: 1.4;"><%= @blog_post.body %></p>
 </div>
