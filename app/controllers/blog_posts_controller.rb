@@ -45,7 +45,5 @@ end
     private
     def blog_post_params
         params.require(:blog_post).permit(:title, :body)
-    enddef destroy
-    
     end
 end
