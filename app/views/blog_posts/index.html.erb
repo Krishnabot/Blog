@@ -1,15 +1,13 @@
-<h1 style="text-align: center; margin-top: 20px;">My Personal Blog</h1>
-
-<% if @blog_posts.empty? %>
-  <h3>No post has been made yet</h3>
+<h1 class="text-2xl font-bold mb-4">Blog Posts</h1>
+<% if @blog_posts.any? %>
+  <ul class="list-disc pl-5">
+    <% @blog_posts.each do |blog_post| %>
+      <li class="mb-2">
+        <%= link_to blog_post.title, blog_post_path(blog_post), class: "text-blue-600 hover:underline" %>
+        <span class="text-gray-500 text-sm">(<%= blog_post.created_at.strftime('%B %d, %Y') %>)</span>
+      </li>
+    <% end %>
+  </ul>
 <% else %>
-  <h1 style="text-align: center; margin-top: 20px;">My Personal Blog</h1>
-
-  <% @blog_posts.each do |blog_post| %>
-    <div style="border: 1px solid #ccc; padding: 10px; margin: 10px;">
-      <h2 style="color: #333;"><%= link_to blog_post.title, blog_post %></h2>
-      <p style="font-size: 16px; line-height: 1.4;"><%= blog_post.body %></p>
-    </div>
-  <% end %>
+  <p>No blog posts available.</p>
 <% end %>
-

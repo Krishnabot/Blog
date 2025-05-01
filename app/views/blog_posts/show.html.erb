@@ -1,10 +1,10 @@
-<h1 style="text-align: center; margin-top: 20px;">My Individual Blog Post</h1>
-
-<div style="text-align: center; margin-top: 10px;">
-  <h4><%= link_to 'Go to Home', root_path %></h4>
-</div>
-
-<div style="padding: 20px; border: 1px solid #ccc; margin: 20px;">
-  <h2 style="color: #333;"><%= @blog_post.title %></h2>
-  <p style="font-size: 16px; line-height: 1.4;"><%= @blog_post.body %></p>
-</div>
+<h1 class="text-2xl font-bold mb-4"><%= @blog_post.title %></h1>
+<p class="text-gray-500 mb-4"><%= @blog_post.created_at.strftime('%B %d, %Y') %></p>
+<div class="prose"><%= @blog_post.body %></div>
+<% if admin_signed_in? %>
+  <div class="mt-4">
+    <%= link_to 'Edit', edit_admin_blog_post_path(@blog_post), class: 'text-blue-600 hover:underline mr-4' %>
+    <%= link_to 'Delete', admin_blog_post_path(@blog_post), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'text-red-600 hover:underline' %>
+  </div>
+<% end %>
+<%= link_to 'Back to posts', blog_posts_path, class: 'text-blue-600 hover:underline mt-4 inline-block' %>
