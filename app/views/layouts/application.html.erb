@@ -24,7 +24,7 @@
                     <summary class="cursor-pointer"><%= week %></summary>
                     <ul class="ml-12 list-disc">
                       <% posts.each do |post| %>
-                        <li><%= link_to post.title, blog_post_path(post), class: "text-blue-600 hover:underline" %></li>
+                        <li><%= link_to post.title, readers_blog_post_path(post), class: "text-blue-600 hover:underline" %></li>
                       <% end %>
                     </ul>
                   </details>

@@ -7,4 +7,4 @@
     <%= link_to 'Delete', admin_blog_post_path(@blog_post), data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, class: 'text-red-600 hover:underline' %>
   </div>
 <% end %>
-<%= link_to 'Back to posts', blog_posts_path, class: 'text-blue-600 hover:underline mt-4 inline-block' %>
+<%= link_to 'Back to posts', readers_blog_posts_path, class: 'text-blue-600 hover:underline mt-4 inline-block' %>
