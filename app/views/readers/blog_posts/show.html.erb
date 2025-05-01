@@ -1,5 +1,10 @@
 <h1 class="text-2xl font-bold mb-4"><%= @blog_post.title %></h1>
-<p class="text-gray-500 mb-4"><%= @blog_post.created_at.strftime('%B %d, %Y') %></p>
+<p class="text-gray-500 mb-4">
+  <%= @blog_post.created_at.strftime('%B %d, %Y') %>
+  <% if @blog_post.admin %>
+    | By <%= @blog_post.admin.email %>
+  <% end %>
+</p>
 <div class="prose"><%= @blog_post.body %></div>
 <% if admin_signed_in? %>
   <div class="mt-4">
