@@ -74,3 +74,4 @@ end
 
 gem "devise"
 gem "tailwindcss-rails"
+gem "faker"
