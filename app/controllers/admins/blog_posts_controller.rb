@@ -7,9 +7,9 @@ class Admin::BlogPostsController < Admin::ProtectedAdminController
   end
 
   def create
-    @blog_post = BlogPost.new(blog_post_params)
+    @blog_post = BlogPost.new(blog_post_params.merge(admin_id: current_admin.id))
     if @blog_post.save
-      redirect_to blog_post_path(@blog_post), notice: 'Blog post was successfully created.'
+      redirect_to readers_blog_post_path(@blog_post), notice: 'Blog post was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -20,7 +20,7 @@ class Admin::BlogPostsController < Admin::ProtectedAdminController
 
   def update
     if @blog_post.update(blog_post_params)
-      redirect_to blog_post_path(@blog_post), notice: 'Blog post was successfully updated.'
+      redirect_to readers_blog_post_path(@blog_post), notice: 'Blog post was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
