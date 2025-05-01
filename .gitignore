@@ -39,3 +39,5 @@ Gemfile.lock
 # Environment files
 /.env
 /.env.*
+/app/assets/builds/*
+!/app/assets/builds/.keep
