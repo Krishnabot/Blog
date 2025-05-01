@@ -1,4 +1,4 @@
-class Admins::BlogPostsController < ProtectedAdminController
+class Admin::BlogPostsController < Admin::ProtectedAdminController
   before_action :set_blog_post, only: [:edit, :update, :destroy]
   before_action :set_sidebar_data, only: [:new, :edit]
 
@@ -9,7 +9,7 @@ class Admins::BlogPostsController < ProtectedAdminController
   def create
     @blog_post = BlogPost.new(blog_post_params)
     if @blog_post.save
-      redirect_to @blog_post, notice: 'Blog post was successfully created.'
+      redirect_to blog_post_path(@blog_post), notice: 'Blog post was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -20,7 +20,7 @@ class Admins::BlogPostsController < ProtectedAdminController
 
   def update
     if @blog_post.update(blog_post_params)
-      redirect_to @blog_post, notice: 'Blog post was successfully updated.'
+      redirect_to blog_post_path(@blog_post), notice: 'Blog post was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end

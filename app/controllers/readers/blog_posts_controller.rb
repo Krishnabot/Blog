@@ -1,4 +1,4 @@
-class BlogPostsController < BaseController
+class Readers::BlogPostsController < Readers::PublicReaderController
   before_action :set_blog_post, only: [:show]
   before_action :set_sidebar_data, only: [:index, :show]
 
