@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :admins, controllers: { sessions: 'admins/sessions' }
+  devise_for :admins # Remove custom sessions controller for now
 
-  resources :blog_posts, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  # Public routes
+  resources :blog_posts, only: [:index, :show]
+
+  # Admin routes
+  namespace :admin do
+    resources :blog_posts, only: [:new, :create, :edit, :update, :destroy]
+  end
 
   root "blog_posts#index"
 end
