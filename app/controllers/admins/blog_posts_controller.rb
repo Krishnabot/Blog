@@ -1,4 +1,4 @@
-class Admin::BlogPostsController < Admin::ProtectedAdminController
+class Admins::BlogPostsController < Admins::ProtectedAdminController
   before_action :set_blog_post, only: [:edit, :update, :destroy]
   before_action :set_sidebar_data, only: [:new, :edit]
 
