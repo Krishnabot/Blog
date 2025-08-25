@@ -75,3 +75,14 @@ end
 gem "devise"
 gem "tailwindcss-rails"
 gem "faker"
+
+gem 'dotenv', groups: [:development, :test]
+
+# API & CORS
+gem "rack-cors"
+
+# JSON serialization
+gem "alba"
+
+# Auth: Devise already present; add JWT
+gem "devise-jwt"
