@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_05_01_093257) do
+ActiveRecord::Schema[7.0].define(version: 2025_08_25_143224) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,7 +32,14 @@ ActiveRecord::Schema[7.0].define(version: 2025_05_01_093257) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "admin_id"
+    t.string "slug"
+    t.string "status"
+    t.datetime "published_at"
+    t.text "excerpt"
+    t.integer "reading_time"
+    t.string "tags", default: [], array: true
     t.index ["admin_id"], name: "index_blog_posts_on_admin_id"
+    t.index ["slug"], name: "index_blog_posts_on_slug", unique: true
   end
 
   add_foreign_key "blog_posts", "admins"
