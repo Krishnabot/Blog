@@ -3,12 +3,14 @@ class Api::V1::Admin::ArticlesController < Api::BaseController
   before_action :set_article, only: [:show, :update, :destroy]
 
   def index
-    scope = BlogPost.order(created_at: :desc)
+    scope = Article.order(created_at: :desc)
+    scope = scope.where("title ILIKE ?", "%#{params[:q]}%") if params[:q].present?
+
     page = (params[:_page] || 1).to_i
     per  = (params[:_perPage] || 10).to_i
     paged = scope.page(page).per(per)
 
-    start = (page - 1) * per
+    start  = (page - 1) * per
     finish = start + paged.size - 1
     response.set_header("Content-Range", "articles #{start}-#{finish}/#{scope.count}")
 
@@ -20,7 +22,7 @@ class Api::V1::Admin::ArticlesController < Api::BaseController
   end
 
   def create
-    article = current_admin.blog_posts.new(article_params)
+    article = current_admin.articles.new(article_params)
     article.published_at ||= Time.current if article.published?
     if article.save
       render json: AdminArticleSerializer.new(article).serialize, status: :created
@@ -49,10 +51,13 @@ class Api::V1::Admin::ArticlesController < Api::BaseController
   private
 
   def set_article
-    @article = BlogPost.find(params[:id])
+    @article = Article.find(params[:id])
   end
 
   def article_params
-    params.require(:article).permit(:title, :body, :status, :excerpt, :slug, :published_at)
+    params.require(:article).permit(
+      :title, :body, :excerpt, :slug, :status, :published_at,
+      tags: []
+    )
   end
 end
