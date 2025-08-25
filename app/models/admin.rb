@@ -1,6 +1,7 @@
 class Admin < ApplicationRecord
-  devise :database_authenticatable, :registerable, :recoverable,
-         :rememberable, :validatable,
-         :jwt_authenticatable, jwt_revocation_strategy: Devise::JWT::RevocationStrategies::Null
-  has_many :blog_posts, dependent: :destroy
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable,
+         :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
+
+  has_many :articles, dependent: :destroy
 end
