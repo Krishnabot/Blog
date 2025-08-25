@@ -86,3 +86,7 @@ gem "alba"
 
 # Auth: Devise already present; add JWT
 gem "devise-jwt"
+
+ # pagination for index endpoints
+gem "kaminari"           
+
