@@ -1,20 +1,25 @@
 Rails.application.routes.draw do
-  devise_for :admins
-
-  # Public routes under readers namespace
-  namespace :readers do
-    resources :blog_posts, only: [:index, :show]
+  devise_for :admins,
+    path: "admins",
+    controllers: { sessions: "admins/sessions" }
+  namespace :admins do
+    get "dashboard", to: "dashboard#index"
+    resources :blog_posts, except: [:index, :show] 
   end
 
-  # Admin routes
-  namespace :admin do
-    resources :blog_posts, only: [:new, :create, :edit, :update, :destroy]
-    get 'dashboard', to: 'dashboard#index'
+
+  namespace :api do
+    namespace :v1 do
+      devise_scope :admin do
+        post   "admin/sign_in",  to: "admins/sessions#create"
+        delete "admin/sign_out", to: "admins/sessions#destroy"
+      end
+
+      resources :articles, only: [:index, :show], param: :slug
+
+      namespace :admin do
+        resources :articles, except: [:new, :edit], param: :id
+      end
+    end
   end
-
-  # Custom route for /admins
-  get '/admins', to: 'admins/dashboard#redirect_based_on_auth'
-
-  # Root to public blog posts index
-  root "readers/blog_posts#index"
 end
