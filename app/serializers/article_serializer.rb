@@ -1,14 +1,7 @@
-
 class ArticleSerializer
   include Alba::Resource
 
-  attributes :title, :slug, :excerpt, :status, :published_at
-
-  attribute :body do |article|
-
-    article.body
-  end
-
+  attributes :title, :slug, :excerpt, :status, :published_at, :reading_time, :tags, :body
 
   attribute :cover_image_url do |article|
     if article.cover_image.attached?

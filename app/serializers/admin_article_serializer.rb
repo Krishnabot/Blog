@@ -1,8 +1,8 @@
-
 class AdminArticleSerializer
   include Alba::Resource
 
-  attributes :id, :title, :slug, :excerpt, :status, :published_at, :created_at, :updated_at, :body
+  attributes :id, :title, :slug, :excerpt, :status, :published_at,
+             :created_at, :updated_at, :reading_time, :tags, :body
 
   attribute :author_email do |article|
     article.admin.email
